@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 222 47% 6%;
+  --foreground: 210 40% 98%;
+  --surface: 222 40% 9%;
+  --surface-hover: 222 35% 12%;
+  --surface-elevated: 222 34% 13%;
+  --border: 217 33% 20%;
+  --muted: 222 30% 14%;
+  --muted-foreground: 215 20% 65%;
+  --primary: 160 84% 39%;
+  --primary-foreground: 222 47% 6%;
+  --accent: 239 84% 67%;
+  --accent-foreground: 210 40% 98%;
+  --accent-secondary: 280 55% 65%;
+
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Tratamento sutil da fotografia de perfil (nunca a própria imagem muda) */
+  --photo-overlay-opacity: 0.05;
+  --photo-brightness: 1;
+}
+
+.light {
+  --background: 210 40% 98%;
+  --foreground: 222 47% 8%;
+  --surface: 0 0% 100%;
+  --surface-hover: 210 40% 96%;
+  --surface-elevated: 210 40% 99%;
+  --border: 214 32% 88%;
+  --muted: 210 40% 94%;
+  --muted-foreground: 215 16% 42%;
+  --primary: 160 84% 32%;
+  --primary-foreground: 210 40% 98%;
+  --accent: 239 70% 55%;
+  --accent-foreground: 210 40% 98%;
+  --accent-secondary: 280 45% 55%;
+  --photo-overlay-opacity: 0.04;
+  --photo-brightness: 1.02;
+}
+
+/*
+ * Temas sazonais (Spring/Summer/Autumn/Winter).
+ * Cada estação tem um modo fixo (Primavera e Inverno são escuras;
+ * Verão e Outono são claras) — não é uma variação independente do
+ * dark/light mode, é parte da identidade da própria estação.
+ * Só redefinem tokens de cor — componentes e estrutura não mudam.
+ */
+[data-season="spring"] {
+  /* Primavera — escura: verde de folhagem + rosa floral + azul-céu. Três
+     matizes claramente distintos (não é só "tudo verde"), para lembrar um
+     jardim: vegetação, flores e céu claro. */
+  --background: 146 20% 7%;
+  --surface: 146 16% 10%;
+  --surface-hover: 146 15% 13%;
+  --surface-elevated: 146 15% 14%;
+  --border: 146 17% 22%;
+  --muted: 146 15% 15%;
+  --muted-foreground: 146 8% 64%;
+  --primary: 142 55% 40%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 334 58% 63%;
+  --accent-foreground: 0 0% 100%;
+  --accent-secondary: 205 50% 62%;
+  /* leve toque frio/natural */
+  --photo-overlay-opacity: 0.07;
+  --photo-brightness: 1;
+}
+
+[data-season="summer"] {
+  /* Verão — clara e muito luminosa: amarelo-sol vibrante + azul-oceano.
+     Fundo bem claro e neutro-quente para reforçar "leveza", em contraste
+     direto com o outono (mais escuro/terroso). */
+  --background: 46 60% 97%;
+  --surface: 0 0% 100%;
+  --surface-hover: 45 55% 94%;
+  --surface-elevated: 46 45% 99%;
+  --border: 42 40% 88%;
+  --muted: 45 48% 93%;
+  --muted-foreground: 32 18% 36%;
+  --primary: 40 90% 45%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 202 88% 45%;
+  --accent-foreground: 0 0% 100%;
+  --accent-secondary: 353 78% 62%;
+  /* bem mais luminoso */
+  --photo-overlay-opacity: 0.02;
+  --photo-brightness: 1.06;
+}
+
+[data-season="autumn"] {
+  /* Outono — clara, terrosa e "de floresta": terracota + marrom de madeira
+     + verde-musgo escuro. Sem vermelho/vinho — a paleta inteira gira em
+     torno de tons de terra, bem diferente do azul/amarelo do verão. */
+  --background: 30 26% 88%;
+  --surface: 32 20% 94%;
+  --surface-hover: 28 22% 85%;
+  --surface-elevated: 32 18% 95%;
+  --border: 26 20% 76%;
+  --muted: 28 20% 83%;
+  --muted-foreground: 24 20% 28%;
+  --primary: 16 60% 45%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 26 42% 24%;
+  --accent-foreground: 0 0% 100%;
+  --accent-secondary: 95 28% 25%;
+  /* leve toque quente */
+  --photo-overlay-opacity: 0.09;
+  --photo-brightness: 0.98;
+}
+
+[data-season="winter"] {
+  /* Inverno — escura: azul de precisão + cinza-gelo + violeta de cristal.
+     Fundo puxando para azul-violeta (não apenas azul), reforçando a
+     sensação fria e "tecnológica" pedida. */
+  --background: 222 24% 7%;
+  --surface: 222 20% 10%;
+  --surface-hover: 222 18% 13%;
+  --surface-elevated: 222 18% 14%;
+  --border: 222 20% 23%;
+  --muted: 222 18% 15%;
+  --muted-foreground: 220 12% 67%;
+  --primary: 204 82% 46%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 195 22% 72%;
+  --accent-foreground: 210 30% 10%;
+  --accent-secondary: 258 40% 62%;
+  /* leve toque frio/azulado */
+  --photo-overlay-opacity: 0.08;
+  --photo-brightness: 0.97;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+::selection {
+  background-color: hsl(var(--primary) / 0.3);
+  color: hsl(var(--foreground));
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
+
+:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
