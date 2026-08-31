@@ -13,6 +13,10 @@ export function ThemeSelector({ className }: { className?: string }) {
   const [mounted, setMounted] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
+  // Marca como montado só depois do primeiro paint no cliente, para o ícone
+  // sazonal (que depende de localStorage, indisponível no servidor) nunca
+  // divergir entre o HTML do servidor e a primeira renderização do cliente.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), []);
 
   useEffect(() => {

@@ -29,10 +29,15 @@ export function SeasonProvider({ children }: { children: React.ReactNode }) {
   const [season, setSeason] = useState<Season>(resolveSeason(INITIAL_MODE));
 
   useEffect(() => {
+    // localStorage não existe no servidor, então a única forma de sincronizar
+    // o modo real sem gerar mismatch de hidratação é ler e aplicar aqui, uma
+    // vez, logo após a montagem (veja o comentário de INITIAL_MODE acima).
+    /* eslint-disable react-hooks/set-state-in-effect */
     const stored = window.localStorage.getItem(SEASON_STORAGE_KEY) as SeasonMode | null;
     const mode = stored ?? INITIAL_MODE;
     setSeasonModeState(mode);
     setSeason(resolveSeason(mode));
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
 
   useEffect(() => {

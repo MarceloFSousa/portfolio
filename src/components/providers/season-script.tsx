@@ -35,6 +35,5 @@ const SEASON_INIT_SCRIPT = `
 `;
 
 export function SeasonScript() {
-  // eslint-disable-next-line react/no-danger
   return <script dangerouslySetInnerHTML={{ __html: SEASON_INIT_SCRIPT }} />;
 }
