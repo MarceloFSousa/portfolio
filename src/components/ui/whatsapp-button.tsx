@@ -13,7 +13,7 @@ interface WhatsAppButtonProps {
 
 export function WhatsAppButton({
   message,
-  label = "Solicitar teste pelo WhatsApp",
+  label = "Falar pelo WhatsApp",
   variant = "primary",
   size = "md",
   className,

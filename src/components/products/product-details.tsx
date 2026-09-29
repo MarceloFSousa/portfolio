@@ -1,14 +1,25 @@
-import { CheckCircle2, ListChecks, ShieldCheck, Youtube } from "lucide-react";
+import {
+  BadgeCheck,
+  CheckCircle2,
+  KeyRound,
+  ListChecks,
+  MessageCircle,
+  Quote,
+  ShieldCheck,
+  type LucideIcon,
+} from "lucide-react";
 import type { Product } from "@/types";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { CoverImage } from "@/components/ui/cover-image";
 import { Gallery } from "@/components/ui/gallery";
 import { Icon } from "@/components/ui/icon";
+import { RiskDisclaimer } from "@/components/ui/risk-disclaimer";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
+import { YouTubeEmbed } from "@/components/ui/youtube-embed";
+import { StickyBuyBar } from "@/components/products/sticky-buy-bar";
 import { getTechnologiesByIds } from "@/lib/utils";
-import { createProductTrialMessage } from "@/lib/whatsapp";
+import { createProductPurchaseMessage, createProductQuestionMessage } from "@/lib/whatsapp";
 
 const statusVariant: Record<Product["status"], "primary" | "default" | "accent"> = {
   Disponível: "primary",
@@ -16,50 +27,120 @@ const statusVariant: Record<Product["status"], "primary" | "default" | "accent">
   Descontinuado: "default",
 };
 
+const licenseTitle: Record<Product["licenseType"], string> = {
+  "Licença única": "Licença única",
+  Vitalícia: "Licença vitalícia",
+  "Assinatura mensal": "Assinatura mensal",
+};
+
+const licenseCaption: Record<Product["licenseType"], string> = {
+  "Licença única": "Pagamento único, sem mensalidade.",
+  Vitalícia: "Pagamento único, sem mensalidade e sem prazo de validade.",
+  "Assinatura mensal": "Cobrança mensal.",
+};
+
+/** Ex.: "Licença vitalícia · 4 contas". */
+function formatLicense(product: Product): string {
+  const accounts = product.licenseAccounts;
+  const title = licenseTitle[product.licenseType];
+  return accounts ? `${title} · ${accounts} ${accounts === 1 ? "conta" : "contas"}` : title;
+}
+
+// Âncora dos botões principais — a barra fixa do mobile aparece quando eles saem da tela.
+const CTA_ID = "product-cta";
+
 export function ProductDetails({ product }: { product: Product }) {
   const techs = getTechnologiesByIds(product.technologies);
+  const purchaseMessage = createProductPurchaseMessage(product.name);
+
+  // Garantias de compra exibidas logo abaixo dos botões principais.
+  const trustItems = [
+    product.guaranteeInfo && {
+      icon: BadgeCheck,
+      title: "Garantia de 7 dias",
+      text: "Não gostou, devolvemos 100% do valor.",
+    },
+    {
+      icon: KeyRound,
+      title: formatLicense(product),
+      text: licenseCaption[product.licenseType],
+    },
+    {
+      icon: MessageCircle,
+      title: "Suporte direto",
+      text: "Ajuda na instalação e configuração com quem desenvolveu.",
+    },
+  ].filter((item) => Boolean(item)) as { icon: LucideIcon; title: string; text: string }[];
+
+  const cover = (
+    <CoverImage
+      src={product.image}
+      alt={product.name}
+      category={product.category}
+      seed={product.id}
+      className="aspect-video w-full border border-border"
+      sizes="(min-width: 1024px) 800px, 100vw"
+      aspectRatio={product.imageAspectRatio}
+    />
+  );
 
   return (
     <article>
       <section className="border-b border-border py-14 sm:py-20">
         <Container>
-          {product.isExample && (
-            <Badge variant="accent" className="mb-6">
-              Produto de exemplo
-            </Badge>
-          )}
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="primary">{product.category}</Badge>
-            <Badge variant={statusVariant[product.status]}>{product.status}</Badge>
-            <Badge>{product.platform}</Badge>
-          </div>
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            <div>
+              {product.isExample && (
+                <Badge variant="accent" className="mb-6">
+                  Produto de exemplo
+                </Badge>
+              )}
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge variant="primary">{product.category}</Badge>
+                <Badge variant={statusVariant[product.status]}>{product.status}</Badge>
+                <Badge>{product.platform}</Badge>
+              </div>
 
-          <h1 className="font-display mt-6 max-w-3xl text-3xl font-light tracking-tight text-foreground sm:text-4xl">
-            {product.name}
-          </h1>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            {product.shortDescription}
-          </p>
+              <h1 className="font-display mt-6 max-w-3xl text-3xl font-light tracking-tight text-foreground sm:text-4xl">
+                {product.name}
+              </h1>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                {product.shortDescription}
+              </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <p className="font-mono text-2xl text-foreground">{product.price}</p>
-            <span className="text-sm text-muted-foreground">{product.licenseType}</span>
-          </div>
+              <p className="mt-8 font-mono text-2xl text-foreground">{product.price}</p>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <WhatsAppButton
-              message={createProductTrialMessage(product.name)}
-              label="Solicitar teste pelo WhatsApp"
-            />
-            {product.videoUrl && (
-              <Button
-                href={product.videoUrl}
-                variant="secondary"
-                className="border-red-600 bg-red-600 text-white hover:bg-red-700 hover:opacity-100"
-              >
-                <Youtube size={18} />
-                Veja o vídeo
-              </Button>
+              <div id={CTA_ID} className="mt-8 flex flex-wrap gap-3">
+                <WhatsAppButton message={purchaseMessage} label="Comprar pelo WhatsApp" size="lg" />
+                <WhatsAppButton
+                  message={createProductQuestionMessage(product.name)}
+                  label="Tirar dúvidas"
+                  variant="secondary"
+                  size="lg"
+                />
+              </div>
+
+              <ul className="mt-10 grid gap-4 border-t border-border pt-6 sm:grid-cols-3">
+                {trustItems.map(({ icon: TrustIcon, title, text }) => (
+                  <li key={title} className="flex items-start gap-3">
+                    <TrustIcon size={18} className="mt-0.5 shrink-0 text-primary" />
+                    <div>
+                      <p className="text-sm text-foreground">{title}</p>
+                      <p className="mt-0.5 text-xs leading-snug text-muted-foreground">{text}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {product.videoUrl ? (
+              <YouTubeEmbed
+                url={product.videoUrl}
+                title={`${product.name}: demonstração`}
+                className="border border-border"
+              />
+            ) : (
+              cover
             )}
           </div>
         </Container>
@@ -68,17 +149,7 @@ export function ProductDetails({ product }: { product: Product }) {
       <Container className="py-14 sm:py-20">
         <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_260px]">
           <div>
-            <CoverImage
-              src={product.image}
-              alt={product.name}
-              category={product.category}
-              seed={product.id}
-              className="aspect-video w-full border border-border"
-              sizes="(min-width: 1024px) 800px, 100vw"
-              aspectRatio={product.imageAspectRatio}
-            />
-
-            <div className="mt-12 space-y-4">
+            <div className="space-y-4">
               <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">
                 Descrição
               </p>
@@ -127,6 +198,28 @@ export function ProductDetails({ product }: { product: Product }) {
               </div>
             )}
 
+            {product.testimonials && product.testimonials.length > 0 && (
+              <div className="mt-12 border-t border-border pt-8">
+                <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">
+                  Quem usa
+                </p>
+                <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                  {product.testimonials.map((item) => (
+                    <figure key={item.author} className="border border-border p-5">
+                      <Quote size={16} className="text-primary" />
+                      <blockquote className="mt-3 text-sm leading-relaxed text-foreground/90">
+                        {item.quote}
+                      </blockquote>
+                      <figcaption className="mt-4 text-xs text-muted-foreground">
+                        {item.author}
+                        {item.role && ` · ${item.role}`}
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {product.faq && product.faq.length > 0 && (
               <div className="mt-12 border-t border-border pt-8">
                 <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">
@@ -146,6 +239,8 @@ export function ProductDetails({ product }: { product: Product }) {
             )}
 
             {product.gallery && <Gallery items={product.gallery} />}
+
+            <RiskDisclaimer className="mt-12" />
           </div>
 
           <aside className="h-fit space-y-6 lg:sticky lg:top-24">
@@ -173,7 +268,7 @@ export function ProductDetails({ product }: { product: Product }) {
               </div>
               <div>
                 <p className="text-muted-foreground">Licença</p>
-                <p className="mt-1 text-foreground">{product.licenseType}</p>
+                <p className="mt-1 text-foreground">{formatLicense(product)}</p>
               </div>
               <div>
                 <p className="text-muted-foreground">Status</p>
@@ -185,23 +280,29 @@ export function ProductDetails({ product }: { product: Product }) {
               </div>
             </div>
 
-            {product.trialInfo && (
+            {product.guaranteeInfo && (
               <div className="border-t border-border pt-6">
-                <p className="text-sm text-foreground">Sobre o teste</p>
+                <p className="flex items-center gap-2 text-sm text-foreground">
+                  <ShieldCheck size={14} className="text-primary" />
+                  Garantia
+                </p>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {product.trialInfo}
+                  {product.guaranteeInfo}
                 </p>
               </div>
             )}
 
-            <WhatsAppButton
-              message={createProductTrialMessage(product.name)}
-              label="Solicitar teste"
-              className="w-full"
-            />
+            <WhatsAppButton message={purchaseMessage} label="Comprar" className="w-full" />
           </aside>
         </div>
       </Container>
+
+      <StickyBuyBar
+        name={product.name}
+        price={product.price}
+        message={purchaseMessage}
+        watchId={CTA_ID}
+      />
     </article>
   );
 }

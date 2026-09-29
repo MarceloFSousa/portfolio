@@ -11,10 +11,10 @@ export function createWhatsAppLink(phone: string, message: string): string {
 }
 
 /**
- * Monta a mensagem padrão de solicitação de teste para um produto.
+ * Monta a mensagem padrão de dúvida sobre um produto (antes da compra).
  */
-export function createProductTrialMessage(productName: string): string {
-  return `Olá! Tenho interesse em testar o produto "${productName}". Gostaria de receber mais informações sobre o funcionamento e o período de teste.`;
+export function createProductQuestionMessage(productName: string): string {
+  return `Olá! Vi o produto "${productName}" no seu site e tenho algumas dúvidas antes de comprar.`;
 }
 
 /**
