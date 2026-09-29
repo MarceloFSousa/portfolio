@@ -84,6 +84,10 @@ export const siteConfig = {
     ctaSecondary: "Solicitar automação",
   },
 
+  // Aviso de risco exibido nas páginas de mercado financeiro e no rodapé
+  riskDisclaimer:
+    "Operações no mercado financeiro envolvem risco e podem resultar em perdas. Resultados passados, inclusive de backtest, não garantem resultados futuros. Os produtos são ferramentas de automação e não constituem recomendação de investimento.",
+
   // Seção "Automação sob demanda"
   automationService: {
     title: "Sua estratégia. Seu sistema.",
