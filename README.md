@@ -143,7 +143,7 @@ Mesma lógica, em `src/data/products.ts` → array `products`. Alimenta
   features: ["..."],
   requirements: ["MetaTrader 5 instalado"],
   image: "/images/products/meu-produto.jpg",
-  videoUrl: "https://www.youtube.com/embed/...",   // opcional, demonstração em vídeo
+  videoUrl: "https://www.youtube.com/watch?v=...",  // opcional, vira um botão "Veja o vídeo"
   category: "Robôs de Trading",       // Robôs de Trading | Indicadores | Automações | Ferramentas | Bibliotecas
   platform: "MetaTrader 5",
   technologies: ["mql5"],

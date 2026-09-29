@@ -1,16 +1,14 @@
-import { CheckCircle2, ListChecks, ShieldCheck } from "lucide-react";
+import { CheckCircle2, ListChecks, ShieldCheck, Youtube } from "lucide-react";
 import type { Product } from "@/types";
 import { Container } from "@/components/ui/container";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { CoverImage } from "@/components/ui/cover-image";
 import { Gallery } from "@/components/ui/gallery";
 import { Icon } from "@/components/ui/icon";
 import { WhatsAppButton } from "@/components/ui/whatsapp-button";
 import { getTechnologiesByIds } from "@/lib/utils";
-import {
-  createProductPurchaseMessage,
-  createProductTrialMessage,
-} from "@/lib/whatsapp";
+import { createProductTrialMessage } from "@/lib/whatsapp";
 
 const statusVariant: Record<Product["status"], "primary" | "default" | "accent"> = {
   Disponível: "primary",
@@ -53,11 +51,16 @@ export function ProductDetails({ product }: { product: Product }) {
               message={createProductTrialMessage(product.name)}
               label="Solicitar teste pelo WhatsApp"
             />
-            <WhatsAppButton
-              message={createProductPurchaseMessage(product.name)}
-              label="Comprar / Falar com vendas"
-              variant="secondary"
-            />
+            {product.videoUrl && (
+              <Button
+                href={product.videoUrl}
+                variant="secondary"
+                className="border-red-600 bg-red-600 text-white hover:bg-red-700 hover:opacity-100"
+              >
+                <Youtube size={18} />
+                Veja o vídeo
+              </Button>
+            )}
           </div>
         </Container>
       </section>
@@ -74,18 +77,6 @@ export function ProductDetails({ product }: { product: Product }) {
               sizes="(min-width: 1024px) 800px, 100vw"
               aspectRatio={product.imageAspectRatio}
             />
-
-            {product.videoUrl && (
-              <div className="mt-6 aspect-video w-full overflow-hidden border border-border">
-                <iframe
-                  src={product.videoUrl}
-                  title={`Demonstração de ${product.name}`}
-                  className="h-full w-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            )}
 
             <div className="mt-12 space-y-4">
               <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">

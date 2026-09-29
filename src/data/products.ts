@@ -13,152 +13,291 @@ import { getImageAspectRatio, resolveImage } from "@/lib/media";
  * Os produtos abaixo são EXEMPLOS (isExample: true) para demonstrar o
  * funcionamento do site. Substitua pelos seus produtos reais.
  */
-export const products: Product[] = [];/*
+export const products: Product[] = [
   {
-    id: "robo-renko-ma200",
-    slug: "robo-renko-ma200",
-    name: "Robô Renko MA200",
+    id: "gradiente-manual",
+    slug: "gradiente-manual",
+    name: "Gradiente Manual",
     shortDescription:
-      "Robô para operar estratégias baseadas em gráfico Renko com média móvel de 200 períodos.",
+      "Você entra pelo atalho de teclado, apregoada ou a mercado, e o robô conduz o gradiente até a meta.",
     fullDescription:
-      "O Robô Renko MA200 foi desenvolvido para operar de forma automática estratégias baseadas em gráfico Renko, utilizando a média móvel de 200 períodos como filtro de tendência. Ideal para operações de tendência em ativos com boa liquidez.",
+      "O Gradiente Manual junta a leitura do trader com a disciplina do robô. Você envia a ordem por atalho de teclado, apregoada ou a mercado, e ele monta a posição em partes, com entradas escalonadas em níveis de preço, respeitando alvo, stop e meta financeira. É o robô mais usado da loja e serve para qualquer trader que opera no MetaTrader 5, sem precisar programar.",
     howItWorks:
-      "O robô monitora a formação dos blocos Renko e cruza a posição do preço com a média móvel de 200 períodos para identificar pontos de entrada e saída, respeitando um gerenciamento de risco configurável.",
+      "Você envia a ordem pelo atalho de teclado, apregoada no preço que escolher ou a mercado. A partir daí o robô distribui as próximas entradas nos níveis de preço definidos nos parâmetros e conduz a saída conforme o alvo, o stop e a meta financeira configurados.",
     features: [
-      "Entradas automáticas baseadas em gráfico Renko",
-      "Filtro de tendência com MA200",
-      "Gerenciamento de risco configurável (stop e alvo)",
-      "Painel de configuração de parâmetros",
-      "Compatível com múltiplos ativos",
+      "Entradas escalonadas em níveis de preço",
+      "Alvo e stop configuráveis",
+      "Meta financeira",
+      "Número mágico configurável para rodar junto com outros robôs",
+      "Ordem apregoada ou a mercado por atalho de teclado",
+    ],
+    requirements: ["MetaTrader 5 instalado", "Conta em corretora com MT5"],
+    image: "/images/products/gradiente-manual.png",
+    videoUrl: "https://www.youtube.com/watch?v=YDTQ-25rL84",
+    category: "Robôs de Trading",
+    platform: "MetaTrader 5",
+    technologies: ["mql5"],
+    price: "R$ 750,00",
+    licenseType: "Licença única",
+    status: "Disponível",
+    trialInfo: "Garantia de 7 dias: não gostou, devolvemos o valor.",
+    faq: [
+      {
+        question: "Preciso saber programar para usar?",
+        answer: "Não. Basta instalar no MetaTrader 5 e ajustar os parâmetros.",
+      },
+      {
+        question: "Qual o principal risco da estratégia?",
+        answer:
+          "Como o gradiente adiciona posições quando o preço anda contra, a exposição aumenta em movimentos longos. Por isso é importante dimensionar bem os níveis e o lote. Teste antes em conta demo.",
+      },
+    ],
+    featured: true,
+  },
+  {
+    id: "gradiente-hedge",
+    slug: "gradiente-hedge",
+    name: "Gradiente Hedge",
+    shortDescription: "Gradiente comprado e vendido ao mesmo tempo, feito para mercado lateral.",
+    fullDescription:
+      "O Gradiente Hedge usa a mesma base do Gradiente Manual, mas opera nas duas pontas ao mesmo tempo: compra e venda. Em mercado lateral, as duas pontas conseguem realizar lucro nas oscilações, o que faz o resultado ser bem maior que o de um gradiente de uma direção só.",
+    howItWorks:
+      "O robô monta gradientes de compra e de venda simultaneamente. Cada oscilação dentro da faixa de preço gera oportunidade de saída com lucro em uma das pontas.",
+    features: [
+      "Gradiente de compra e venda simultâneos",
+      "Otimizado para mercado lateral",
+      "Alvo e stop configuráveis",
+      "Meta financeira",
+      "Número mágico configurável",
     ],
     requirements: [
       "MetaTrader 5 instalado",
-      "Conta em corretora compatível com EAs",
-      "VPS recomendado para operação 24/5",
+      "Conta em modo hedge (permite posições compradas e vendidas no mesmo ativo)",
     ],
-    image: "/images/products/robo-renko-ma200.jpg",
+    image: "/images/products/gradiente-hedge.png",
+    videoUrl: "https://www.youtube.com/watch?v=67s8ZkiIq24",
     category: "Robôs de Trading",
     platform: "MetaTrader 5",
     technologies: ["mql5"],
-    price: "R$ 497,00",
+    price: "R$ 500,00",
     licenseType: "Licença única",
     status: "Disponível",
-    trialInfo:
-      "Período de teste de 7 dias em conta demo, mediante solicitação via WhatsApp.",
+    trialInfo: "Garantia de 7 dias: não gostou, devolvemos o valor.",
     faq: [
       {
-        question: "O robô funciona em conta demo?",
+        question: "Qual o principal risco?",
         answer:
-          "Sim, o robô pode ser testado livremente em conta demo antes da compra.",
+          "Um movimento forte e direcional, para qualquer lado. Nesse cenário uma das pontas acumula prejuízo. O robô rende mais em lateralidade e sofre em tendência forte.",
       },
       {
-        question: "Preciso de VPS para rodar o robô?",
+        question: "Qual a diferença para o Gradiente Manual?",
         answer:
-          "Não é obrigatório, mas é recomendado para manter o robô operando 24/5 sem interrupções.",
+          "O Gradiente Manual opera uma direção por vez. O Hedge opera as duas ao mesmo tempo, ganhando mais na lateralidade em troca de mais risco em tendência.",
+      },
+    ],
+    featured: false,
+  },
+  {
+    id: "biblioteca-ntsl",
+    slug: "biblioteca-ntsl",
+    name: "Biblioteca NTSL para MT5",
+    shortDescription: "Use as funções do Profit dentro do MetaTrader 5 e migre suas estratégias sem reescrever tudo.",
+    fullDescription:
+      "Quem vem do Profit já conhece funções como BuyAtMarket, HasPosition e IsBought. A Biblioteca NTSL traz esses mesmos nomes para o MQL5, então a lógica da sua estratégia continua praticamente igual na migração para o MetaTrader 5. Menos código, menos erro e menos tempo reescrevendo do zero.",
+    howItWorks:
+      "Você importa a biblioteca no seu robô MQL5 e passa a chamar as funções com a mesma sintaxe do NTSL. A biblioteca traduz cada chamada para as operações equivalentes do MT5.",
+    features: [
+      "Funções com os mesmos nomes do Profit (BuyAtMarket, SellAtMarket, BuyStop, HasPosition, IsBought, SetStopLoss e outras)",
+      "Código da estratégia muito mais curto que em MQL5 puro",
+      "Migração de estratégias do Profit para o MT5 sem reescrever a lógica",
+      "Header de importação pronto para usar",
+    ],
+    requirements: [
+      "MetaTrader 5 instalado",
+      "MetaEditor (vem junto com o MT5)",
+      "Noções básicas de programação de robôs",
+    ],
+    image: "/images/products/biblioteca-ntsl.png",
+    videoUrl: "https://www.youtube.com/watch?v=W4zK_DMiLYw",
+    category: "Bibliotecas",
+    platform: "MetaTrader 5",
+    technologies: ["mql5", "ntsl"],
+    price: "R$ 200,00",
+    licenseType: "Licença única",
+    status: "Disponível",
+    trialInfo: "Garantia de 7 dias: não gostou, devolvemos o valor.",
+    faq: [
+      {
+        question: "Para quem é a biblioteca?",
+        answer:
+          "Para quem já programa ou tem estratégias no Profit e quer levar para o MetaTrader 5 sem aprender MQL5 do zero.",
+      },
+      {
+        question: "Preciso saber MQL5?",
+        answer:
+          "Pouco. A estrutura do robô é MQL5, mas a lógica de entrada, saída e posição fica com a sintaxe que você já conhece do Profit.",
       },
     ],
     featured: true,
-    isExample: true,
   },
   {
-    id: "indicador-fluxo",
-    slug: "indicador-fluxo-institucional",
-    name: "Indicador de Fluxo Institucional",
-    shortDescription:
-      "Indicador visual para identificar movimentações de fluxo institucional no gráfico.",
+    id: "notificacao-telegram",
+    slug: "notificacao-telegram",
+    name: "Notificações no Telegram",
+    shortDescription: "Receba no Telegram cada ordem dos seus robôs e o resumo de resultado por estratégia.",
     fullDescription:
-      "Indicador desenvolvido para auxiliar na leitura do fluxo de ordens institucionais diretamente no gráfico, destacando regiões de maior interesse comprador ou vendedor.",
+      "Acompanhe seus robôs sem ficar olhando o MetaTrader 5. Toda ordem enviada por qualquer robô na conta vira uma mensagem no Telegram. Além disso, você recebe resumos diário, semanal e mensal separados por número mágico, ou seja, o resultado de cada estratégia individualmente.",
     howItWorks:
-      "Processa o volume e a movimentação de preço em tempo real, plotando zonas de interesse e alertas visuais diretamente sobre o gráfico.",
+      "O EA roda em um gráfico do MT5 monitorando a conta. Quando um robô envia uma ordem, ele manda a notificação para o seu bot do Telegram. Nos fechamentos de dia, semana e mês, envia o resumo agrupado por número mágico.",
     features: [
-      "Identificação visual de zonas de fluxo",
-      "Alertas sonoros e por push",
-      "Configuração de sensibilidade",
+      "Notificação de ordens de qualquer robô da conta, inclusive de terceiros",
+      "Resumo diário, semanal e mensal",
+      "Resultado separado por número mágico (por estratégia)",
+      "Não interfere na operação dos outros robôs",
     ],
-    requirements: ["MetaTrader 5 instalado"],
-    image: "/images/products/indicador-fluxo.jpg",
-    category: "Indicadores",
-    platform: "MetaTrader 5",
-    technologies: ["mql5"],
-    price: "R$ 197,00",
-    licenseType: "Licença única",
-    status: "Disponível",
-    trialInfo: "Teste de 3 dias disponível mediante solicitação.",
-    featured: true,
-    isExample: true,
-  },
-  {
-    id: "automacao-relatorios",
-    slug: "automacao-de-relatorios-operacionais",
-    name: "Automação de Relatórios Operacionais",
-    shortDescription:
-      "Automação que gera relatórios diários de performance das operações.",
-    fullDescription:
-      "Ferramenta que se conecta à conta do trader e gera automaticamente relatórios diários de performance, incluindo métricas de resultado, drawdown e taxa de acerto.",
-    features: [
-      "Geração automática de relatórios diários",
-      "Métricas de performance e drawdown",
-      "Envio automático por e-mail ou Telegram",
+    requirements: [
+      "MetaTrader 5 instalado",
+      "Conta no Telegram e um bot criado pelo BotFather",
+      "Permitir WebRequest para api.telegram.org nas opções do MT5",
     ],
-    requirements: ["MetaTrader 5 ou 4", "Conta de e-mail ou Telegram para envio"],
-    image: "/images/products/automacao-relatorios.jpg",
+    image: "/images/products/notificacao-telegram.png",
+    videoUrl: "https://www.youtube.com/watch?v=B6l9ydntGwg",
     category: "Automações",
     platform: "MetaTrader 5",
-    technologies: ["mql5", "python"],
-    price: "R$ 297,00",
-    licenseType: "Assinatura mensal",
+    technologies: ["mql5", "telegram"],
+    price: "R$ 250,00",
+    licenseType: "Licença única",
     status: "Disponível",
-    trialInfo: "Teste gratuito de 7 dias.",
-    isExample: true,
+    trialInfo: "Garantia de 7 dias: não gostou, devolvemos o valor.",
+    faq: [
+      {
+        question: "Funciona com robôs que não são seus?",
+        answer: "Sim. Ele monitora as ordens da conta, independente de qual robô enviou.",
+      },
+      {
+        question: "Preciso deixar o MT5 aberto?",
+        answer: "Sim. O EA precisa estar rodando para enviar as notificações, como qualquer robô.",
+      },
+    ],
+    featured: false,
   },
   {
-    id: "biblioteca-metatrader",
-    slug: "biblioteca-utilitaria-metatrader",
-    name: "Biblioteca Utilitária para MetaTrader",
-    shortDescription:
-      "Conjunto de funções reutilizáveis em MQL5 para acelerar o desenvolvimento de robôs.",
+    id: "turtle",
+    slug: "turtle",
+    name: "Turtle",
+    shortDescription: "Robô de rompimento baseado na estratégia dos Turtle Traders.",
     fullDescription:
-      "Biblioteca com funções utilitárias para gerenciamento de risco, controle de posições e logging, prontas para serem incluídas em qualquer robô MQL5.",
+      "O Turtle automatiza a estratégia clássica dos Turtle Traders: entra quando o preço rompe a máxima de um período, buscando pegar o início de uma tendência. Foi testado em backtest em diversos ativos, com os resultados apresentados em vídeo no canal.",
+    howItWorks:
+      "O robô acompanha a máxima dos últimos candles. Quando o preço rompe esse nível, ele entra a favor do rompimento e conduz a posição conforme os parâmetros de saída.",
     features: [
-      "Funções de gerenciamento de risco",
-      "Controle de posições multi-ativo",
-      "Sistema de logging padronizado",
+      "Entrada no rompimento de máxima",
+      "Estratégia seguidora de tendência",
+      "Backtest em diversos ativos",
+      "Número mágico configurável",
     ],
-    requirements: ["MetaEditor / MetaTrader 5"],
-    image: "/images/products/biblioteca-metatrader.jpg",
-    category: "Bibliotecas",
+    requirements: ["MetaTrader 5 instalado", "Conta em corretora com MT5"],
+    image: "/images/products/turtle.png",
+    videoUrl: "https://www.youtube.com/watch?v=rQkV7eOKlBY",
+    category: "Robôs de Trading",
     platform: "MetaTrader 5",
     technologies: ["mql5"],
-    price: "R$ 147,00",
-    licenseType: "Vitalícia",
+    price: "R$ 400,00",
+    licenseType: "Licença única",
     status: "Disponível",
-    isExample: true,
+    trialInfo: "Garantia de 7 dias: não gostou, devolvemos o valor.",
+    faq: [
+      {
+        question: "Em que tipo de mercado ele funciona melhor?",
+        answer:
+          "Em tendência. Para mercado lateral os rompimentos falham com mais frequência, nesse cenário existe o Rabbit, que opera o oposto.",
+      },
+      {
+        question: "Backtest garante resultado?",
+        answer:
+          "Não. Backtest mostra como a estratégia se comportou no passado e ajuda a entender o risco, mas não garante resultado futuro.",
+      },
+    ],
+    featured: false,
   },
   {
-    id: "robo-scalper-wdo",
-    slug: "robo-scalper-wdo",
-    name: "Robô Scalper WDO",
-    shortDescription:
-      "Robô de scalping para mini dólar com gestão de risco automatizada.",
+    id: "rabbit",
+    slug: "rabbit",
+    name: "Rabbit",
+    shortDescription: "O oposto do Turtle: opera contra o rompimento, apostando no retorno do preço.",
     fullDescription:
-      "Robô voltado para operações de scalping no mini contrato de dólar (WDO), com lógica de entrada baseada em price action e gestão de risco totalmente automatizada.",
+      "O Rabbit nasceu do Turtle, mas opera o contrário. Quando o preço rompe a máxima, em vez de seguir o movimento, ele aposta que o rompimento vai falhar e o preço vai voltar. Rende mais em mercado lateral, justamente onde o Turtle sofre. Também foi testado em backtest em diversos ativos, com vídeo no canal.",
+    howItWorks:
+      "O robô identifica o mesmo rompimento que o Turtle, mas entra na direção contrária, buscando o retorno do preço para dentro da faixa.",
     features: [
-      "Estratégia de scalping para WDO",
-      "Stop e alvo dinâmicos",
-      "Controle de horário de operação",
+      "Entrada contra o rompimento",
+      "Estratégia de reversão para mercado lateral",
+      "Backtest em diversos ativos",
+      "Complementa o Turtle em outro regime de mercado",
+      "Número mágico configurável",
     ],
-    requirements: ["Profit Pro", "Assessoria compatível com automação"],
-    image: "/images/products/robo-scalper-wdo.jpg",
+    requirements: ["MetaTrader 5 instalado", "Conta em corretora com MT5"],
+    image: "/images/products/rabbit.png",
+    videoUrl: "https://www.youtube.com/watch?v=Zo0k75zjQfM",
     category: "Robôs de Trading",
-    platform: "Profit / NTSL",
-    technologies: ["ntsl"],
-    price: "R$ 697,00",
+    platform: "MetaTrader 5",
+    technologies: ["mql5"],
+    price: "R$ 400,00",
     licenseType: "Licença única",
-    status: "Em breve",
-    isExample: true,
+    status: "Disponível",
+    trialInfo: "Garantia de 7 dias: não gostou, devolvemos o valor.",
+    faq: [
+      {
+        question: "Posso rodar junto com o Turtle?",
+        answer:
+          "Sim. Como cada um rende melhor em um regime de mercado, rodar os dois com números mágicos diferentes ajuda a equilibrar a curva de resultado.",
+      },
+      {
+        question: "Qual o principal risco?",
+        answer:
+          "Tendência forte. Quando o rompimento se confirma e o preço segue andando, a entrada contrária fica no prejuízo.",
+      },
+    ],
+    featured: false,
+  },
+  {
+    id: "sma",
+    slug: "sma",
+    name: "SMA",
+    shortDescription: "Robô de tendência por médias móveis: acima das médias compra, abaixo vende.",
+    fullDescription:
+      "O SMA é um seguidor de tendência simples e objetivo. Quando o preço está acima das médias móveis, ele fica comprado. Quando está abaixo, fica vendido. Foi testado em backtest em diversos ativos.",
+    howItWorks:
+      "O robô compara o preço com as médias móveis configuradas. A posição acompanha o lado em que o preço está em relação às médias.",
+    features: [
+      "Compra acima das médias e vende abaixo",
+      "Períodos das médias configuráveis",
+      "Backtest em diversos ativos",
+      "Número mágico configurável",
+    ],
+    requirements: ["MetaTrader 5 instalado", "Conta em corretora com MT5"],
+    image: "/images/products/sma.png",
+    videoUrl: "https://www.youtube.com/watch?v=_eUF-pMI4Pk",
+    category: "Robôs de Trading",
+    platform: "MetaTrader 5",
+    technologies: ["mql5"],
+    price: "R$ 400,00",
+    licenseType: "Licença única",
+    status: "Disponível",
+    trialInfo: "Garantia de 7 dias: não gostou, devolvemos o valor.",
+    faq: [
+      {
+        question: "Em que tipo de mercado ele funciona melhor?",
+        answer: "Em tendência. Em mercado lateral o preço cruza as médias com frequência e gera entradas falsas.",
+      },
+      {
+        question: "Backtest garante resultado?",
+        answer: "Não. Mostra o comportamento passado e ajuda a entender o risco, mas não garante resultado futuro.",
+      },
+    ],
+    featured: false,
   },
 ];
-*/
 
 /**
  * Resolve os caminhos de imagem contra /public em tempo de execução no

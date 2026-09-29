@@ -108,7 +108,7 @@ export interface Product {
   /** Proporção (largura / altura) real de `image`, resolvida em tempo de execução no servidor. */
   imageAspectRatio?: number;
   gallery?: GalleryItem[];
-  /** URL de vídeo de demonstração (YouTube, formato embed), opcional. */
+  /** URL de vídeo de demonstração (YouTube), opcional. */
   videoUrl?: string;
   category: ProductCategory;
   platform: Platform;

@@ -51,6 +51,7 @@ export const technologies: Technology[] = [
   { id: "xunit", name: "xUnit", icon: "FlaskConical", category: "Ferramenta", level: "Intermediário" },
   { id: "nunit", name: "NUnit", icon: "TestTube", category: "Ferramenta", level: "Intermediário" },
   { id: "jest", name: "Jest", icon: "Beaker", category: "Ferramenta", level: "Intermediário" },
+  { id: "telegram", name: "Telegram", icon: "Send", category: "Ferramenta", level: "Intermediário" },
 
   // Mercado Financeiro
   { id: "mql5", name: "MQL5", icon: "TrendingUp", category: "Mercado Financeiro", level: "Avançado" },
