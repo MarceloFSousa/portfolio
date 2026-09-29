@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Projetos",
   description:
     "Sistemas, automações, APIs e ferramentas que desenvolvi em software e mercado financeiro.",
+  alternates: { canonical: "/projetos" },
 };
 
 export default function ProjetosPage() {
