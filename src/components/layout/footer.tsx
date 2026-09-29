@@ -40,7 +40,10 @@ export function Footer() {
       </Container>
 
       <div className="border-t border-border py-5">
-        <Container>
+        <Container className="space-y-3">
+          <p className="max-w-3xl text-xs leading-relaxed text-muted-foreground/80">
+            {siteConfig.riskDisclaimer}
+          </p>
           <p className="text-xs text-muted-foreground">
             © {year} {siteConfig.handle}
           </p>

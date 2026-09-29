@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductDetails } from "@/components/products/product-details";
+import { JsonLd } from "@/components/seo/json-ld";
 import { getAllProducts, getProductBySlug } from "@/data/products";
+import { siteConfig } from "@/data/site";
+import { productJsonLd } from "@/lib/structured-data";
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
@@ -19,14 +22,25 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     return { title: "Produto não encontrado" };
   }
 
+  const title = product.seoTitle ?? product.name;
+  const description = product.seoDescription ?? product.shortDescription;
+  const url = `/mercado-financeiro/${product.slug}`;
+  const images = product.image ? [product.image] : undefined;
+
   return {
-    title: product.name,
-    description: product.shortDescription,
+    title,
+    description,
+    alternates: { canonical: url },
     openGraph: {
-      title: product.name,
-      description: product.shortDescription,
-      images: product.image ? [product.image] : undefined,
+      type: "website",
+      locale: "pt_BR",
+      siteName: siteConfig.handle,
+      url,
+      title,
+      description,
+      images,
     },
+    twitter: { card: "summary_large_image", title, description, images },
   };
 }
 
@@ -38,5 +52,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  return <ProductDetails product={product} />;
+  return (
+    <>
+      <JsonLd data={productJsonLd(product)} />
+      <ProductDetails product={product} />
+    </>
+  );
 }

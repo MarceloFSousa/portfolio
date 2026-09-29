@@ -95,10 +95,21 @@ export interface FAQItem {
   answer: string;
 }
 
+export interface Testimonial {
+  quote: string;
+  author: string;
+  /** Contexto opcional (ex.: "Trader de mini índice"). */
+  role?: string;
+}
+
 export interface Product {
   id: string;
   slug: string;
   name: string;
+  /** Título para Google/redes (sem o sufixo do site). Cai em `name` se omitido. */
+  seoTitle?: string;
+  /** Descrição para Google/redes (~150 caracteres). Cai em `shortDescription` se omitida. */
+  seoDescription?: string;
   shortDescription: string;
   fullDescription: string;
   howItWorks?: string;
@@ -110,14 +121,23 @@ export interface Product {
   gallery?: GalleryItem[];
   /** URL de vídeo de demonstração (YouTube), opcional. */
   videoUrl?: string;
+  /** Data de publicação do vídeo (AAAA-MM-DD). Necessária para o vídeo aparecer como rich result no Google. */
+  videoUploadDate?: string;
   category: ProductCategory;
   platform: Platform;
   technologies: string[]; // ids de Technology
+  /** Preço exibido (ex.: "R$ 750,00"). */
   price: string;
+  /** Preço numérico em BRL, usado nos dados estruturados (JSON-LD). */
+  priceValue: number;
   licenseType: LicenseType;
+  /** Quantas contas de corretora a licença cobre. */
+  licenseAccounts?: number;
   status: ProductStatus;
-  trialInfo?: string;
+  /** Texto da garantia exibido perto do botão de compra. */
+  guaranteeInfo?: string;
   faq?: FAQItem[];
+  testimonials?: Testimonial[];
   featured?: boolean;
   isExample?: boolean;
 }

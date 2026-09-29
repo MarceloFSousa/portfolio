@@ -5,12 +5,14 @@ import { ProductGrid } from "@/components/products/product-grid";
 import { MarketHero } from "@/components/sections/market-hero";
 import { ProductsVsServices } from "@/components/sections/products-vs-services";
 import { AutomationService } from "@/components/sections/automation-service";
+import { RiskDisclaimer } from "@/components/ui/risk-disclaimer";
 import { getAllProducts, getProductCategories } from "@/data/products";
 
 export const metadata: Metadata = {
-  title: "Mercado Financeiro",
+  title: "Robôs para MetaTrader 5 e Automação de Estratégias",
   description:
-    "Robôs de trading, indicadores, automações e desenvolvimento personalizado para traders e investidores.",
+    "Robôs de trading para MT5 (gradiente, hedge, rompimento, médias móveis), biblioteca NTSL para migrar do Profit e automação da sua estratégia sob medida.",
+  alternates: { canonical: "/mercado-financeiro" },
 };
 
 export default function MercadoFinanceiroPage() {
@@ -27,7 +29,7 @@ export default function MercadoFinanceiroPage() {
           <SectionHeading
             eyebrow="Produtos"
             title="Robôs, indicadores e automações"
-            description="Soluções prontas para testar e usar. Solicite um período de teste antes de comprar."
+            description="Soluções prontas para usar no MetaTrader 5, todas com garantia incondicional de 7 dias."
           />
 
           <div className="mt-12">
@@ -39,6 +41,10 @@ export default function MercadoFinanceiroPage() {
       <div id="automacao" className="scroll-mt-24">
         <AutomationService />
       </div>
+
+      <Container className="pb-16">
+        <RiskDisclaimer />
+      </Container>
     </>
   );
 }

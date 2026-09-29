@@ -9,15 +9,15 @@ import { getImageAspectRatio, resolveImage } from "@/lib/media";
  * 2. Adicione um novo objeto neste array com um "slug" único
  * 3. Pronto — o card, a página de detalhes e o botão de WhatsApp
  *    são gerados automaticamente a partir destes dados
- *
- * Os produtos abaixo são EXEMPLOS (isExample: true) para demonstrar o
- * funcionamento do site. Substitua pelos seus produtos reais.
  */
 export const products: Product[] = [
   {
     id: "gradiente-manual",
     slug: "gradiente-manual",
     name: "Gradiente Manual",
+    seoTitle: "Gradiente Manual: Robô de Grid para MetaTrader 5",
+    seoDescription:
+      "Robô de gradiente (grid) para MT5: você entra por atalho de teclado e ele monta a posição em níveis, com alvo, stop e meta financeira. Garantia de 7 dias.",
     shortDescription:
       "Você entra pelo atalho de teclado, apregoada ou a mercado, e o robô conduz o gradiente até a meta.",
     fullDescription:
@@ -38,9 +38,11 @@ export const products: Product[] = [
     platform: "MetaTrader 5",
     technologies: ["mql5"],
     price: "R$ 750,00",
-    licenseType: "Licença única",
+    priceValue: 750,
+    licenseType: "Vitalícia",
+    licenseAccounts: 4,
     status: "Disponível",
-    trialInfo: "Garantia de 7 dias: não gostou, devolvemos o valor.",
+    guaranteeInfo: "Garantia incondicional de 7 dias: não gostou, devolvemos 100% do valor.",
     faq: [
       {
         question: "Preciso saber programar para usar?",
@@ -58,9 +60,12 @@ export const products: Product[] = [
     id: "gradiente-hedge",
     slug: "gradiente-hedge",
     name: "Gradiente Hedge",
+    seoTitle: "Gradiente Hedge: Robô de Grid Hedge para MT5",
+    seoDescription:
+      "Robô de gradiente comprado e vendido ao mesmo tempo para MetaTrader 5, feito para mercado lateral. Alvo, stop e meta financeira configuráveis.",
     shortDescription: "Gradiente comprado e vendido ao mesmo tempo, feito para mercado lateral.",
     fullDescription:
-      "O Gradiente Hedge usa a mesma base do Gradiente Manual, mas opera nas duas pontas ao mesmo tempo: compra e venda. Em mercado lateral, as duas pontas conseguem realizar lucro nas oscilações, o que faz o resultado ser bem maior que o de um gradiente de uma direção só.",
+      "O Gradiente Hedge usa a mesma base do Gradiente Manual, mas opera nas duas pontas ao mesmo tempo: compra e venda. Em mercado lateral, as duas pontas conseguem realizar lucro nas oscilações, aproveitando esse tipo de mercado melhor do que um gradiente de uma direção só.",
     howItWorks:
       "O robô monta gradientes de compra e de venda simultaneamente. Cada oscilação dentro da faixa de preço gera oportunidade de saída com lucro em uma das pontas.",
     features: [
@@ -80,9 +85,11 @@ export const products: Product[] = [
     platform: "MetaTrader 5",
     technologies: ["mql5"],
     price: "R$ 500,00",
-    licenseType: "Licença única",
+    priceValue: 500,
+    licenseType: "Vitalícia",
+    licenseAccounts: 4,
     status: "Disponível",
-    trialInfo: "Garantia de 7 dias: não gostou, devolvemos o valor.",
+    guaranteeInfo: "Garantia incondicional de 7 dias: não gostou, devolvemos 100% do valor.",
     faq: [
       {
         question: "Qual o principal risco?",
@@ -92,7 +99,7 @@ export const products: Product[] = [
       {
         question: "Qual a diferença para o Gradiente Manual?",
         answer:
-          "O Gradiente Manual opera uma direção por vez. O Hedge opera as duas ao mesmo tempo, ganhando mais na lateralidade em troca de mais risco em tendência.",
+          "O Gradiente Manual opera uma direção por vez. O Hedge opera as duas ao mesmo tempo, aproveitando mais a lateralidade em troca de mais risco em tendência.",
       },
     ],
     featured: false,
@@ -101,6 +108,9 @@ export const products: Product[] = [
     id: "biblioteca-ntsl",
     slug: "biblioteca-ntsl",
     name: "Biblioteca NTSL para MT5",
+    seoTitle: "Biblioteca NTSL para MQL5: Migre do Profit para o MT5",
+    seoDescription:
+      "Converta estratégias do Profit (NTSL) para o MetaTrader 5 usando as mesmas funções: BuyAtMarket, HasPosition, IsBought e outras. Menos código em MQL5.",
     shortDescription: "Use as funções do Profit dentro do MetaTrader 5 e migre suas estratégias sem reescrever tudo.",
     fullDescription:
       "Quem vem do Profit já conhece funções como BuyAtMarket, HasPosition e IsBought. A Biblioteca NTSL traz esses mesmos nomes para o MQL5, então a lógica da sua estratégia continua praticamente igual na migração para o MetaTrader 5. Menos código, menos erro e menos tempo reescrevendo do zero.",
@@ -123,9 +133,11 @@ export const products: Product[] = [
     platform: "MetaTrader 5",
     technologies: ["mql5", "ntsl"],
     price: "R$ 200,00",
-    licenseType: "Licença única",
+    priceValue: 200,
+    licenseType: "Vitalícia",
+    licenseAccounts: 4,
     status: "Disponível",
-    trialInfo: "Garantia de 7 dias: não gostou, devolvemos o valor.",
+    guaranteeInfo: "Garantia incondicional de 7 dias: não gostou, devolvemos 100% do valor.",
     faq: [
       {
         question: "Para quem é a biblioteca?",
@@ -144,6 +156,9 @@ export const products: Product[] = [
     id: "notificacao-telegram",
     slug: "notificacao-telegram",
     name: "Notificações no Telegram",
+    seoTitle: "Notificações do MetaTrader 5 no Telegram",
+    seoDescription:
+      "Receba no Telegram cada ordem dos seus robôs do MT5 e resumos diário, semanal e mensal por número mágico. Funciona também com robôs de terceiros.",
     shortDescription: "Receba no Telegram cada ordem dos seus robôs e o resumo de resultado por estratégia.",
     fullDescription:
       "Acompanhe seus robôs sem ficar olhando o MetaTrader 5. Toda ordem enviada por qualquer robô na conta vira uma mensagem no Telegram. Além disso, você recebe resumos diário, semanal e mensal separados por número mágico, ou seja, o resultado de cada estratégia individualmente.",
@@ -166,9 +181,11 @@ export const products: Product[] = [
     platform: "MetaTrader 5",
     technologies: ["mql5", "telegram"],
     price: "R$ 250,00",
-    licenseType: "Licença única",
+    priceValue: 250,
+    licenseType: "Vitalícia",
+    licenseAccounts: 4,
     status: "Disponível",
-    trialInfo: "Garantia de 7 dias: não gostou, devolvemos o valor.",
+    guaranteeInfo: "Garantia incondicional de 7 dias: não gostou, devolvemos 100% do valor.",
     faq: [
       {
         question: "Funciona com robôs que não são seus?",
@@ -185,6 +202,9 @@ export const products: Product[] = [
     id: "turtle",
     slug: "turtle",
     name: "Turtle",
+    seoTitle: "Turtle: Robô de Rompimento (Turtle Traders) para MT5",
+    seoDescription:
+      "Robô de rompimento para MetaTrader 5 baseado na estratégia dos Turtle Traders: entra quando o preço rompe a máxima do período. Backtest em vários ativos.",
     shortDescription: "Robô de rompimento baseado na estratégia dos Turtle Traders.",
     fullDescription:
       "O Turtle automatiza a estratégia clássica dos Turtle Traders: entra quando o preço rompe a máxima de um período, buscando pegar o início de uma tendência. Foi testado em backtest em diversos ativos, com os resultados apresentados em vídeo no canal.",
@@ -203,9 +223,11 @@ export const products: Product[] = [
     platform: "MetaTrader 5",
     technologies: ["mql5"],
     price: "R$ 400,00",
-    licenseType: "Licença única",
+    priceValue: 400,
+    licenseType: "Vitalícia",
+    licenseAccounts: 4,
     status: "Disponível",
-    trialInfo: "Garantia de 7 dias: não gostou, devolvemos o valor.",
+    guaranteeInfo: "Garantia incondicional de 7 dias: não gostou, devolvemos 100% do valor.",
     faq: [
       {
         question: "Em que tipo de mercado ele funciona melhor?",
@@ -224,6 +246,9 @@ export const products: Product[] = [
     id: "rabbit",
     slug: "rabbit",
     name: "Rabbit",
+    seoTitle: "Rabbit: Robô de Reversão Contra Rompimento para MT5",
+    seoDescription:
+      "Robô para MetaTrader 5 que opera contra o rompimento, buscando o retorno do preço em mercado lateral. Complementa o Turtle. Backtest em vários ativos.",
     shortDescription: "O oposto do Turtle: opera contra o rompimento, apostando no retorno do preço.",
     fullDescription:
       "O Rabbit nasceu do Turtle, mas opera o contrário. Quando o preço rompe a máxima, em vez de seguir o movimento, ele aposta que o rompimento vai falhar e o preço vai voltar. Rende mais em mercado lateral, justamente onde o Turtle sofre. Também foi testado em backtest em diversos ativos, com vídeo no canal.",
@@ -243,9 +268,11 @@ export const products: Product[] = [
     platform: "MetaTrader 5",
     technologies: ["mql5"],
     price: "R$ 400,00",
-    licenseType: "Licença única",
+    priceValue: 400,
+    licenseType: "Vitalícia",
+    licenseAccounts: 4,
     status: "Disponível",
-    trialInfo: "Garantia de 7 dias: não gostou, devolvemos o valor.",
+    guaranteeInfo: "Garantia incondicional de 7 dias: não gostou, devolvemos 100% do valor.",
     faq: [
       {
         question: "Posso rodar junto com o Turtle?",
@@ -264,6 +291,9 @@ export const products: Product[] = [
     id: "sma",
     slug: "sma",
     name: "SMA",
+    seoTitle: "SMA: Robô de Médias Móveis para MetaTrader 5",
+    seoDescription:
+      "Robô seguidor de tendência por médias móveis para MT5: compra acima das médias e vende abaixo. Períodos configuráveis e backtest em vários ativos.",
     shortDescription: "Robô de tendência por médias móveis: acima das médias compra, abaixo vende.",
     fullDescription:
       "O SMA é um seguidor de tendência simples e objetivo. Quando o preço está acima das médias móveis, ele fica comprado. Quando está abaixo, fica vendido. Foi testado em backtest em diversos ativos.",
@@ -282,9 +312,11 @@ export const products: Product[] = [
     platform: "MetaTrader 5",
     technologies: ["mql5"],
     price: "R$ 400,00",
-    licenseType: "Licença única",
+    priceValue: 400,
+    licenseType: "Vitalícia",
+    licenseAccounts: 4,
     status: "Disponível",
-    trialInfo: "Garantia de 7 dias: não gostou, devolvemos o valor.",
+    guaranteeInfo: "Garantia incondicional de 7 dias: não gostou, devolvemos 100% do valor.",
     faq: [
       {
         question: "Em que tipo de mercado ele funciona melhor?",
