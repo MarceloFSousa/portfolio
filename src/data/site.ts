@@ -30,6 +30,8 @@ export const siteConfig = {
 
   linkedin: "https://www.linkedin.com/in/marcelofsousa",
 
+  telegram: "https://t.me/MarceloFSousa",
+
   // Username do GitHub — usado na seção GitHub e para consultar a API pública
   githubUsername: "MarceloFSousa",
 
@@ -155,6 +157,14 @@ export const socialLinks = [
     value: "Meu perfil",
     href: siteConfig.linkedin,
     icon: "Linkedin",
+  },
+  {
+    id: "telegram",
+    name: "Telegram",
+    description: "Fale comigo diretamente",
+    value: "@MarceloFSousa",
+    href: siteConfig.telegram,
+    icon: "Send",
   },
   {
     id: "github",
