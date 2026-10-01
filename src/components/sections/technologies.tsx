@@ -15,10 +15,11 @@ const categoryOrder: TechCategory[] = [
 ];
 
 export function Technologies() {
+  const core = technologies.filter((t) => t.core);
   const grouped = categoryOrder
     .map((category) => ({
       category,
-      items: technologies.filter((t) => t.category === category),
+      items: technologies.filter((t) => t.category === category && !t.core),
     }))
     .filter((group) => group.items.length > 0);
 
@@ -28,10 +29,30 @@ export function Technologies() {
         <SectionHeading
           eyebrow="Stack"
           title="Tecnologias"
-          description="Ferramentas e linguagens que uso no dia a dia."
+          description="O que uso todos os dias e o que já usei em projetos."
         />
 
-        <div className="mt-12 space-y-8">
+        <div className="mt-12 border-t border-border pt-6">
+          <p className="font-mono text-xs uppercase tracking-[0.14em] text-primary">
+            Stack principal
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2.5">
+            {core.map((tech) => (
+              <span
+                key={tech.id}
+                className="inline-flex items-center gap-2 rounded-md border border-primary/40 bg-primary/5 px-4 py-2 text-base text-foreground"
+              >
+                <Icon name={tech.icon} size={16} className="text-primary" />
+                {tech.name}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <p className="mt-14 font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">
+          Também já usei
+        </p>
+        <div className="mt-4 space-y-6">
           {grouped.map((group) => (
             <div
               key={group.category}

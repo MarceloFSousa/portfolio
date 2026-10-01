@@ -8,9 +8,6 @@ import { getImageAspectRatio, resolveImage } from "@/lib/media";
  * 1. Adicione a imagem em /public/images/projects/
  * 2. Adicione um novo objeto neste array com um "slug" único
  * 3. Pronto — o card e a página de detalhes são gerados automaticamente
- *
- * Os projetos abaixo são EXEMPLOS (isExample: true) para demonstrar o
- * funcionamento do site. Substitua pelos seus projetos reais.
  */
 export const projects: Project[] = [
   {
@@ -55,8 +52,7 @@ export const projects: Project[] = [
     ],
     technologies: ["python", "csharp", "dotnet", "nextjs", "supabase", "docker", "linux", "nginx"],
     category: "Mercado Financeiro",
-    complexity: "Avançada",
-    status: "Concluído",
+    status: "Em produção",
     demo: "https://app.everhedge.com.br",
     featured: true,
   },
@@ -107,7 +103,6 @@ export const projects: Project[] = [
     ],
     technologies: ["csharp", "dotnet", "nextjs", "postgresql", "sse","rest-api"],
     category: "Mercado Financeiro",
-    complexity: "Avançada",
     status: "Concluído",
     featured: true,
   },
@@ -151,7 +146,6 @@ export const projects: Project[] = [
     ],
     technologies: ["typescript", "nextjs", "nestjs", "supabase","rest-api","vercel"],
     category: "Web",
-    complexity: "Intermediária",
     status: "Concluído",
     demo: "https://do-tog.com.br",
     github: {

@@ -1,9 +1,9 @@
 # Portfólio — Marcelo Sousa
 
-Portfólio pessoal + vitrine de soluções para mercado financeiro, construído em
+Portfólio pessoal para recrutadores (projetos, tecnologias e experiência), construído em
 Next.js (App Router) com TypeScript e Tailwind CSS. Este documento explica
 **como o projeto está organizado** para que mudanças futuras — trocar textos,
-adicionar projetos/produtos, ajustar cores — sejam feitas sem precisar mexer
+adicionar projetos, ajustar cores — sejam feitas sem precisar mexer
 nos componentes.
 
 ---
@@ -34,15 +34,14 @@ npm run start     # roda o build de produção
 
 **Nenhum componente contém texto, preço, link ou nome "chumbado" no código.**
 Tudo isso vive em `src/data/*.ts`. Os componentes só sabem *como exibir* um
-projeto/produto/tecnologia — não *quais* existem. Isso significa que, para
+projeto/tecnologia — não *quais* existem. Isso significa que, para
 90% das mudanças do dia a dia, você só vai editar um objeto em um desses
-quatro arquivos:
+três arquivos:
 
 ```
 src/data/
 ├── site.ts          → identidade, contato, textos institucionais
 ├── projects.ts       → projetos do portfólio
-├── products.ts       → robôs/indicadores/automações do mercado financeiro
 └── technologies.ts    → lista de tecnologias exibida na seção "Tecnologias"
 ```
 
@@ -59,11 +58,11 @@ Um único objeto `siteConfig` com tudo que é "sobre você":
 | `email`, `phone`, `linkedin`, `githubUsername`, `youtube` | Footer, seção Contato, link do GitHub/YouTube |
 | `whatsapp` | Número usado em **todos** os links de WhatsApp do site |
 | `bio[]`, `experience[]`, `interests[]` | Página `/sobre` |
-| `hero` | Badge e textos dos botões da Hero |
-| `marketHero` | Título/subtítulo/CTAs da Hero de `/mercado-financeiro` |
-| `automationService` | Textos e as 5 etapas da seção "Automação sob demanda" |
+| `hero` | Badge, linha de stack/experiência e textos dos botões da Hero |
+| `cvPath` | PDF do currículo em `/public`; com o arquivo lá, os botões "Baixar CV" aparecem |
+| `highlights` | Números de resultado exibidos abaixo da Hero |
 | `recruiterNote` | Linha "Disponível para oportunidades..." na página de Contato |
-| `whatsappDefaultMessage` / `whatsappAutomationMessage` | Mensagens pré-preenchidas do WhatsApp |
+| `whatsappDefaultMessage` | Mensagem pré-preenchida do WhatsApp |
 
 `socialLinks[]`, no mesmo arquivo, alimenta a grade de contato — para
 adicionar um novo canal (ex.: Instagram), adicione um objeto novo
@@ -93,8 +92,7 @@ categoria e a página `/projetos/[slug]` são todos gerados a partir daí.
   image: "/images/projects/meu-projeto.jpg",
   technologies: ["python", "postgresql"],   // ids de technologies.ts
   category: "Backend",              // Software | Web | Backend | Automação | Mercado Financeiro | Outros
-  complexity: "Intermediária",       // Básica | Intermediária | Avançada
-  status: "Concluído",               // Concluído | Em desenvolvimento | Manutenção
+  status: "Concluído",               // Concluído | Em produção | Em desenvolvimento | Manutenção
   github: { Repositório: "https://github.com/..." },
   demo: "https://...",               // opcional
   featured: true,                    // aparece na Home
@@ -127,41 +125,6 @@ projeto — só adicione outra chave ao dicionário.
 
 ---
 
-## Adicionando um produto (robô/indicador/automação)
-
-Mesma lógica, em `src/data/products.ts` → array `products`. Alimenta
-`/mercado-financeiro` e `/mercado-financeiro/[slug]`.
-
-```ts
-{
-  id: "meu-produto",
-  slug: "meu-produto",               // vira a URL: /mercado-financeiro/meu-produto
-  name: "Nome do Produto",
-  shortDescription: "Frase curta para o card.",
-  fullDescription: "Descrição completa.",
-  howItWorks: "Como funciona (opcional).",
-  features: ["..."],
-  requirements: ["MetaTrader 5 instalado"],
-  image: "/images/products/meu-produto.jpg",
-  videoUrl: "https://www.youtube.com/watch?v=...",  // opcional, vira um botão "Veja o vídeo"
-  category: "Robôs de Trading",       // Robôs de Trading | Indicadores | Automações | Ferramentas | Bibliotecas
-  platform: "MetaTrader 5",
-  technologies: ["mql5"],
-  price: "R$ 497,00",
-  licenseType: "Licença única",       // Licença única | Assinatura mensal | Vitalícia
-  status: "Disponível",               // Disponível | Em breve | Descontinuado
-  trialInfo: "Período de teste de 7 dias.",
-  faq: [{ question: "...", answer: "..." }],
-  featured: true,
-}
-```
-
-O botão **"Solicitar teste pelo WhatsApp"** é gerado automaticamente — não há
-nada para configurar por produto além do `name` (a mensagem usa o nome do
-produto, veja abaixo).
-
----
-
 ## WhatsApp — um único helper, nunca duplicado
 
 Todo link de WhatsApp do site passa por
@@ -169,14 +132,11 @@ Todo link de WhatsApp do site passa por
 
 ```ts
 createWhatsAppLink(phone, message)          // monta o link wa.me
-createProductTrialMessage(productName)      // "Olá! Tenho interesse em testar..."
-createProductPurchaseMessage(productName)   // "Olá! Tenho interesse em adquirir..."
 ```
 
 O número de telefone vem sempre de `siteConfig.whatsapp`. Para trocar o
-número, edite **um lugar só**: `src/data/site.ts`. Para mudar o texto de uma
-mensagem específica (ex.: a de orçamento de automação), edite
-`siteConfig.whatsappAutomationMessage` ou as funções em `lib/whatsapp.ts`.
+número, edite **um lugar só**: `src/data/site.ts`. Para mudar o texto da
+mensagem, edite `siteConfig.whatsappDefaultMessage`.
 
 ---
 
@@ -187,8 +147,7 @@ Cada imagem tem um caminho esperado dentro de `public/images/`:
 ```
 public/images/
 ├── profile/    → foto de perfil (siteConfig.avatar)
-├── projects/   → capas dos projetos
-└── products/   → capas dos produtos
+└── projects/   → capas dos projetos
 ```
 
 **Você não precisa fazer nada além de colocar o arquivo na pasta certa.**
@@ -196,11 +155,11 @@ public/images/
 existe: se sim, ele é exibido com `next/image`; se ainda não existe, o
 [`CoverImage`](src/components/ui/cover-image.tsx) mostra uma capa ilustrativa
 (gradiente + ícone da categoria) automaticamente — nunca uma imagem quebrada.
-Isso vale para `avatar`, `image` e `gallery` de projetos/produtos.
+Isso vale para `avatar`, `image` e `gallery` de projetos.
 
 ### Galeria de imagens (com título e descrição, estilo LinkedIn)
 
-Além da capa (`image`), cada projeto/produto aceita um array `gallery` com
+Além da capa (`image`), cada projeto aceita um array `gallery` com
 imagens extras exibidas na página de detalhes, cada uma com título e
 descrição opcionais:
 
@@ -225,14 +184,14 @@ Renderizado por [`Gallery`](src/components/ui/gallery.tsx).
 
 `src/data/technologies.ts` é a lista usada pela seção "Tecnologias" da Home
 (agrupada por `category`) e pelas tags exibidas nos cards/páginas de projeto
-e produto (via o array `technologies: [...]`, que referencia os `id`s daqui).
+(via o array `technologies: [...]`, que referencia os `id`s daqui).
 
 ```ts
-{ id: "python", name: "Python", icon: "FileCode", category: "Linguagem", level: "Avançado" }
+{ id: "python", name: "Python", icon: "FileCode", category: "Linguagem", core: true }
 ```
 
 Adicionar uma tecnologia nova = adicionar um objeto aqui e usar o `id` dela
-em `projects.ts`/`products.ts`.
+em `projects.ts`.
 
 ---
 
@@ -274,13 +233,12 @@ src/components/
 ├── layout/       → Navbar, Footer (usados no layout raiz)
 ├── sections/     → blocos de página (Hero, About, Technologies, Contact...)
 ├── projects/     → ProjectCard, ProjectGrid (com filtro), ProjectDetails, GithubLinkButton
-├── products/     → ProductCard, ProductGrid (com filtro), ProductDetails
 ├── providers/    → SeasonProvider/SeasonScript (tema)
 └── ui/           → átomos reutilizáveis: Button, Badge, Modal, CoverImage, Icon...
 ```
 
 Regra geral: uma página em `src/app/**/page.tsx` só busca dados
-(`getAllProjects()`, `getProductBySlug()` etc.) e monta seções — a lógica de
+(`getAllProjects()`, `getProjectBySlug()` etc.) e monta seções — a lógica de
 exibição fica nos componentes, e o conteúdo fica em `data/`.
 
 ---
@@ -289,12 +247,10 @@ exibição fica nos componentes, e o conteúdo fica em `data/`.
 
 | Rota | Conteúdo |
 |---|---|
-| `/` | Hero, Sobre (resumo), Tecnologias, Projetos em destaque, GitHub, ponte para Mercado Financeiro, CTA de contato |
+| `/` | Hero, Sobre (resumo), Tecnologias, Projetos em destaque, GitHub, CTA de contato |
 | `/sobre` | Bio completa, experiência |
 | `/projetos` | Todos os projetos, com filtro por categoria |
 | `/projetos/[slug]` | Página individual do projeto |
-| `/mercado-financeiro` | Hero próprio, comparação produtos vs. serviço, grade de produtos, seção de automação sob demanda |
-| `/mercado-financeiro/[slug]` | Página individual do produto |
 | `/contato` | Todos os canais de contato |
 
 ---
@@ -302,6 +258,6 @@ exibição fica nos componentes, e o conteúdo fica em `data/`.
 ## Deploy
 
 `npm run build` gera as páginas estáticas/SSG onde possível
-(`generateStaticParams` em `projetos/[slug]` e `mercado-financeiro/[slug]`).
+(`generateStaticParams` em `projetos/[slug]`).
 Funciona em qualquer host com suporte a Next.js (Vercel, etc.) — só ajuste
 `siteConfig.url` para o domínio final antes de gerar o sitemap/metadata.

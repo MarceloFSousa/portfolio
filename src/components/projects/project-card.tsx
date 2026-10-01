@@ -27,7 +27,6 @@ export function ProjectCard({ project }: { project: Project }) {
       <div className="flex flex-1 flex-col p-6">
         <div className="flex flex-wrap items-center gap-2">
           <Badge variant="primary">{project.category}</Badge>
-          <Badge>{project.complexity}</Badge>
         </div>
 
         <h3 className="mt-4 text-lg font-semibold text-foreground transition-colors group-hover:text-primary">

@@ -1,14 +1,16 @@
 import Image from "next/image";
-import { Briefcase } from "lucide-react";
+import { Briefcase, Download, Linkedin } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/data/site";
 import { hasPublicImage } from "@/lib/media";
 import { getInitials } from "@/lib/utils";
 
 export function AboutFull() {
   const hasAvatar = hasPublicImage(siteConfig.avatar);
+  const hasCv = hasPublicImage(siteConfig.cvPath);
 
   return (
     <section className="py-16 sm:py-20">
@@ -38,6 +40,20 @@ export function AboutFull() {
                 {siteConfig.fullName}
               </h1>
               <p className="text-sm text-muted-foreground">{siteConfig.role}</p>
+              <p className="text-sm text-muted-foreground">{siteConfig.location} · Remoto</p>
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-2">
+              {hasCv && (
+                <Button href={siteConfig.cvPath} size="sm" external download>
+                  <Download size={16} />
+                  {siteConfig.hero.ctaCv}
+                </Button>
+              )}
+              <Button href={siteConfig.linkedin} variant="secondary" size="sm">
+                <Linkedin size={16} />
+                {siteConfig.hero.ctaLinkedin}
+              </Button>
             </div>
 
             <div className="mt-6 flex flex-wrap gap-2">

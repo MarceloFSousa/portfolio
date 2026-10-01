@@ -1,12 +1,14 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Download, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { SeasonalMotif } from "@/components/ui/seasonal-motif";
 import { HeroPortrait } from "@/components/sections/hero-portrait";
 import { siteConfig } from "@/data/site";
-import { createWhatsAppLink } from "@/lib/whatsapp";
+import { hasPublicImage } from "@/lib/media";
 
 export function Hero() {
+  const hasCv = hasPublicImage(siteConfig.cvPath);
+
   return (
     <section className="relative overflow-hidden border-b border-border">
       <div className="absolute inset-0 -z-10 bg-grid-pattern bg-[length:44px_44px] [mask-image:radial-gradient(ellipse_70%_70%_at_100%_0%,black_15%,transparent_70%)]" />
@@ -28,7 +30,7 @@ export function Hero() {
               className="animate-fade-up mt-6 font-display text-4xl font-light tracking-tight text-foreground sm:text-5xl lg:text-6xl"
               style={{ animationDelay: "80ms" }}
             >
-              {siteConfig.handle}
+              {siteConfig.fullName}
             </h1>
 
             <p
@@ -37,6 +39,20 @@ export function Hero() {
             >
               {siteConfig.role}
             </p>
+
+            <ul
+              className="animate-fade-up mt-5 flex flex-wrap gap-2"
+              style={{ animationDelay: "180ms" }}
+            >
+              {siteConfig.hero.facts.map((fact) => (
+                <li
+                  key={fact}
+                  className="rounded-md border border-border px-2.5 py-1 font-mono text-xs text-foreground"
+                >
+                  {fact}
+                </li>
+              ))}
+            </ul>
 
             <p
               className="animate-fade-up mt-6 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg"
@@ -53,13 +69,17 @@ export function Hero() {
                 {siteConfig.hero.ctaPrimary}
                 <ArrowRight size={18} />
               </Button>
-              <Button
-                href={createWhatsAppLink(siteConfig.whatsapp, siteConfig.whatsappDefaultMessage)}
-                variant="secondary"
-                size="lg"
-              >
-                {siteConfig.hero.ctaSecondary}
-              </Button>
+              {hasCv ? (
+                <Button href={siteConfig.cvPath} variant="secondary" size="lg" external download>
+                  <Download size={18} />
+                  {siteConfig.hero.ctaCv}
+                </Button>
+              ) : (
+                <Button href={siteConfig.linkedin} variant="secondary" size="lg">
+                  <Linkedin size={18} />
+                  {siteConfig.hero.ctaLinkedin}
+                </Button>
+              )}
             </div>
           </div>
 

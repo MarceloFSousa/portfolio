@@ -23,7 +23,6 @@ export function ProjectDetails({ project }: { project: Project }) {
           )}
           <div className="flex flex-wrap items-center gap-2">
             <Badge variant="primary">{project.category}</Badge>
-            <Badge>{project.complexity}</Badge>
             <Badge>{project.status}</Badge>
           </div>
 
@@ -138,10 +137,6 @@ export function ProjectDetails({ project }: { project: Project }) {
               <div>
                 <p className="text-muted-foreground">Categoria</p>
                 <p className="mt-1 text-foreground">{project.category}</p>
-              </div>
-              <div>
-                <p className="text-muted-foreground">Complexidade</p>
-                <p className="mt-1 text-foreground">{project.complexity}</p>
               </div>
               <div>
                 <p className="text-muted-foreground">Status</p>

@@ -8,11 +8,11 @@ export const siteConfig = {
   // Handle usado como identidade pública do site (navbar, Hero, título das
   // páginas, footer) — o mesmo de YouTube, LinkedIn, GitHub e domínio.
   handle: "MarceloFSousa",
-  // Nome completo, exibido só na página /sobre.
+  // Nome completo, exibido na Hero e na página /sobre.
   fullName: "Marcelo Flores Sousa",
-  role: "Desenvolvedor Backend / Full Stack",
+  role: "Desenvolvedor Backend / Full Stack Pleno",
   tagline:
-    "Desenvolvedor Backend e Full Stack especializado em sistemas de alta performance, tempo real e baixa latência. Da API REST ao robô de trading, construo software que não pode falhar, com a disciplina de engenharia que o mercado financeiro exige.",
+    "Construo APIs REST de alta disponibilidade, sistemas em tempo real e produtos SaaS do zero à produção, com .NET e Python no backend e Next.js no frontend.",
   location: "Porto Alegre, RS",
 
   // URL pública do site (usada em metadata/SEO/Open Graph)
@@ -21,6 +21,10 @@ export const siteConfig = {
   // Foto de perfil, usada na Hero e em "Sobre mim". Basta colocar o arquivo
   // em /public/images/profile/ com este nome — nenhum componente precisa mudar.
   avatar: "/images/profile/marcelo.jpg",
+
+  // Currículo em PDF. Coloque o arquivo em /public com este nome e os botões
+  // "Baixar CV" aparecem sozinhos; sem o arquivo, o botão vira "LinkedIn".
+  cvPath: "/cv-marcelo-flores-sousa.pdf",
 
   email: "omarcelo.0101@gmail.com",
   phone: "+55 51 99694-6128",
@@ -53,7 +57,7 @@ export const siteConfig = {
   },
     {
   period: "Jun/2022 - atual",
-  title: "Desenvolvedor Full Stack, Freelance",
+  title: "Desenvolvedor Full Stack, Freelance (em paralelo)",
   description:
     "Desenvolvo aplicações web e APIs sob demanda de ponta a ponta, com .NET, Node.js, NestJS e Next.js, da concepção ao deploy em produção. Projetos variam de apps colaborativos em tempo real a integrações e automações. No mercado financeiro, construí robôs de trading algorítmico em C#, Python, MQL5 e NTSL que consomem cotações tick a tick e executam operações com baixa latência de ponta a ponta (117 clientes atendidos em NTSL), além de plataformas de trading em tempo real e pipelines de backtesting com métricas de risco.",
 },
@@ -70,71 +74,30 @@ export const siteConfig = {
 
   // Textos de apoio usados em seções da Home
   hero: {
-    badge: "Disponível para novos projetos e oportunidades",
+    badge: "Disponível para vagas · Remoto · CLT ou PJ",
+    // Linha de triagem: stack principal, tempo de experiência e modelo de trabalho
+    facts: ["C# / .NET", "Python", "Next.js", "4+ anos", "Remoto"],
     ctaPrimary: "Ver projetos",
-    ctaSecondary: "Falar comigo",
+    ctaCv: "Baixar CV",
+    ctaLinkedin: "LinkedIn",
   },
 
-  // Hero da página /mercado-financeiro
-  marketHero: {
-    title: "Soluções para mercado financeiro",
-    subtitle:
-      "Robôs, indicadores, automações e desenvolvimento personalizado para transformar estratégias em software.",
-    ctaPrimary: "Ver produtos",
-    ctaSecondary: "Solicitar automação",
-  },
+  // Resultados em números, exibidos logo abaixo da Hero
+  highlights: [
+    { value: "8 min → 40 s", label: "Execução crítica otimizada com cache em memória" },
+    { value: "4,5 mi/dia", label: "Valores persistidos por um worker, sem impactar o backend" },
+    { value: "860+", label: "Usuários na EverHedge, SaaS em produção" },
+    { value: "117", label: "Clientes atendidos com robôs de trading em NTSL" },
+  ],
 
-  // Aviso de risco exibido nas páginas de mercado financeiro e no rodapé
-  riskDisclaimer:
-    "Operações no mercado financeiro envolvem risco e podem resultar em perdas. Resultados passados, inclusive de backtest, não garantem resultados futuros. Os produtos são ferramentas de automação e não constituem recomendação de investimento.",
-
-  // Seção "Automação sob demanda"
-  automationService: {
-    title: "Sua estratégia. Seu sistema.",
-    description:
-      "Você tem uma estratégia que funciona no manual, mas executar na mão toma tempo e deixa passar oportunidade. Eu transformo essa estratégia em um robô que opera sozinho, seguindo exatamente as suas regras. Já entreguei automação para mais de 100 traders, de robôs de execução a indicadores e ferramentas sob medida.",
-    steps: [
-      {
-        number: "01",
-        title: "Entendo sua estratégia",
-        description:
-          "Conversamos sobre suas regras de entrada, saída e gestão de risco até eu entender a lógica como você opera.",
-      },
-      {
-        number: "02",
-        title: "Defino regras e escopo",
-        description:
-          "Documento cada condição e alinho com você o que o sistema faz antes de escrever a primeira linha.",
-      },
-      {
-        number: "03",
-        title: "Desenvolvo",
-        description: "Construo o robô ou indicador na sua plataforma, com código limpo e ajustável.",
-      },
-      {
-        number: "04",
-        title: "Testo em dados reais",
-        description:
-          "Valido em histórico e simulação pra garantir que ele faz o que a estratégia manda, sem surpresa.",
-      },
-      {
-        number: "05",
-        title: "Entrego e dou suporte",
-        description:
-          "Você recebe pronto pra usar, com acompanhamento pra ajuste fino depois da entrega.",
-      },
-    ],
-    cta: "Solicitar orçamento",
-  },
+  // Chamada final da Home
+  contactCtaTitle: "Procurando um desenvolvedor Backend ou Full Stack? Vamos conversar.",
 
   recruiterNote:
     "Disponível para vagas de Desenvolvedor Backend ou Full Stack Pleno, remoto (CLT ou PJ). PCD, elegível para cota legal (Lei 8.213/91).",
 
   whatsappDefaultMessage:
-    "Olá! Vi seu portfólio e gostaria de conversar sobre um projeto.",
-
-  whatsappAutomationMessage:
-    "Olá! Tenho uma estratégia de trading e gostaria de solicitar um orçamento para desenvolver uma automação personalizada.",
+    "Olá, Marcelo! Vi seu portfólio e gostaria de conversar sobre uma oportunidade.",
 } as const;
 
 export const socialLinks = [
@@ -181,7 +144,7 @@ export const socialLinks = [
   {
     id: "youtube",
     name: "YouTube",
-    description: "Vídeos e demonstrações dos produtos",
+    description: "Vídeos sobre desenvolvimento e trading algorítmico",
     value: "Meu canal",
     href: siteConfig.youtube,
     icon: "Youtube",
