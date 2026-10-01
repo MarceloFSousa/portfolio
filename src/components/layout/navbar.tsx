@@ -12,7 +12,6 @@ const navLinks = [
   { label: "Sobre", href: "/sobre" },
   { label: "Projetos", href: "/projetos" },
   { label: "Tecnologias", href: "/#tecnologias" },
-  { label: "Mercado Financeiro", href: "/mercado-financeiro" },
   { label: "Contato", href: "/contato" },
 ];
 

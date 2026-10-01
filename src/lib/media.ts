@@ -7,7 +7,7 @@ import path from "node:path";
  * capa ilustrativa (gradiente + ícone) quando o arquivo ainda não foi enviado.
  *
  * Assim, basta o usuário adicionar a imagem na pasta correta com o nome
- * configurado nos dados (projects.ts / products.ts / site.ts) que ela passa
+ * configurado nos dados (projects.ts / site.ts) que ela passa
  * a ser exibida automaticamente — sem alterar nenhum componente.
  */
 export function hasPublicImage(publicPath?: string): boolean {

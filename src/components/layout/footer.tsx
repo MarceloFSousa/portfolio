@@ -5,7 +5,6 @@ import { Container } from "@/components/ui/container";
 const links = [
   { label: "Sobre", href: "/sobre" },
   { label: "Projetos", href: "/projetos" },
-  { label: "Mercado Financeiro", href: "/mercado-financeiro" },
   { label: "Contato", href: "/contato" },
   { label: "GitHub", href: `https://github.com/${siteConfig.githubUsername}` },
   { label: "LinkedIn", href: siteConfig.linkedin },
@@ -40,10 +39,7 @@ export function Footer() {
       </Container>
 
       <div className="border-t border-border py-5">
-        <Container className="space-y-3">
-          <p className="max-w-3xl text-xs leading-relaxed text-muted-foreground/80">
-            {siteConfig.riskDisclaimer}
-          </p>
+        <Container>
           <p className="text-xs text-muted-foreground">
             © {year} {siteConfig.handle}
           </p>

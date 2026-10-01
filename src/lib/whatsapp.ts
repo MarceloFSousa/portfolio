@@ -9,17 +9,3 @@ export function createWhatsAppLink(phone: string, message: string): string {
   const encodedMessage = encodeURIComponent(message);
   return `https://wa.me/${sanitizedPhone}?text=${encodedMessage}`;
 }
-
-/**
- * Monta a mensagem padrão de dúvida sobre um produto (antes da compra).
- */
-export function createProductQuestionMessage(productName: string): string {
-  return `Olá! Vi o produto "${productName}" no seu site e tenho algumas dúvidas antes de comprar.`;
-}
-
-/**
- * Monta a mensagem padrão de interesse em compra/contratação de um produto.
- */
-export function createProductPurchaseMessage(productName: string): string {
-  return `Olá! Tenho interesse em adquirir o produto "${productName}". Pode me passar mais detalhes sobre valores e formas de pagamento?`;
-}

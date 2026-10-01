@@ -2,8 +2,8 @@ import { ImageResponse } from "next/og";
 import { siteConfig } from "@/data/site";
 
 // Imagem padrão de compartilhamento (WhatsApp, Facebook, Telegram, LinkedIn)
-// para páginas sem imagem própria. Produtos usam a própria capa.
-export const alt = `${siteConfig.handle}: robôs para MetaTrader 5 e desenvolvimento de software`;
+// para páginas sem imagem própria. Projetos usam a própria capa.
+export const alt = `${siteConfig.handle}: ${siteConfig.role}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -29,7 +29,7 @@ export default function OpengraphImage() {
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div style={{ display: "flex", fontSize: 68, lineHeight: 1.1, maxWidth: 980 }}>
-            Robôs para MetaTrader 5 e automação da sua estratégia
+            Sistemas de alta performance, tempo real e baixa latência
           </div>
           <div style={{ display: "flex", fontSize: 30, color: "#94a3b8" }}>
             {siteConfig.role} · {siteConfig.location}
